@@ -1,0 +1,26 @@
+# ========================
+# .gitignore
+# These files should NOT be pushed to GitHub
+# ========================
+
+# Node.js dependencies (too large to push, installed via npm install)
+node_modules/
+
+# Environment variables (contains secrets like passwords!)
+.env
+
+# Build output files
+dist/
+build/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor config files
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
