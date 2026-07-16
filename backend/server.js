@@ -70,7 +70,7 @@ app.use('/api/admin', require('./routes/admin'));
 app.use('/api/dashboard', require('./routes/dashboard'));
 
 // Purchases routes - Part 4
-// app.use('/api/purchases', require('./routes/purchases'));
+app.use('/api/purchases', require('./routes/purchases'));
 
 // Transfers routes - Part 5
 // app.use('/api/transfers', require('./routes/transfers'));
