@@ -76,10 +76,10 @@ app.use('/api/purchases', require('./routes/purchases'));
 app.use('/api/transfers', require('./routes/transfers'));
 
 // Assignments routes - Part 6
-// app.use('/api/assignments', require('./routes/assignments'));
+app.use('/api/assignments', require('./routes/assignments'));
 
 // Expenditures routes - Part 6
-// app.use('/api/expenditures', require('./routes/expenditures'));
+app.use('/api/expenditures', require('./routes/expenditures'));
 
 // Audit Logs routes - Part 7
 // app.use('/api/audit-logs', require('./routes/auditLogs'));

@@ -16,6 +16,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import PurchasesPage from './pages/PurchasesPage';
 import TransfersPage from './pages/TransfersPage';
+import AssignmentsPage from './pages/AssignmentsPage';
 
 // Placeholder pages (will be replaced in upcoming parts)
 const ComingSoon = ({ title }) => (
@@ -93,7 +94,7 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['Admin', 'BaseCommander']}>
                 <Layout>
-                  <ComingSoon title="Assignments & Expenditures — Coming in Part 6" />
+                  <AssignmentsPage />
                 </Layout>
               </ProtectedRoute>
             }
