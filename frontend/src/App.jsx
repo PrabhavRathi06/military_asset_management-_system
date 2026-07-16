@@ -15,6 +15,7 @@ import Layout from './components/Layout';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import PurchasesPage from './pages/PurchasesPage';
+import TransfersPage from './pages/TransfersPage';
 
 // Placeholder pages (will be replaced in upcoming parts)
 const ComingSoon = ({ title }) => (
@@ -80,7 +81,7 @@ function App() {
             element={
               <ProtectedRoute>
                 <Layout>
-                  <ComingSoon title="Transfers — Coming in Part 5" />
+                  <TransfersPage />
                 </Layout>
               </ProtectedRoute>
             }

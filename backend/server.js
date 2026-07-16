@@ -73,7 +73,7 @@ app.use('/api/dashboard', require('./routes/dashboard'));
 app.use('/api/purchases', require('./routes/purchases'));
 
 // Transfers routes - Part 5
-// app.use('/api/transfers', require('./routes/transfers'));
+app.use('/api/transfers', require('./routes/transfers'));
 
 // Assignments routes - Part 6
 // app.use('/api/assignments', require('./routes/assignments'));
