@@ -17,6 +17,8 @@ import DashboardPage from './pages/DashboardPage';
 import PurchasesPage from './pages/PurchasesPage';
 import TransfersPage from './pages/TransfersPage';
 import AssignmentsPage from './pages/AssignmentsPage';
+import AuditLogsPage from './pages/AuditLogsPage';
+import AdminPage from './pages/AdminPage';
 
 // Placeholder pages (will be replaced in upcoming parts)
 const ComingSoon = ({ title }) => (
@@ -106,7 +108,7 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['Admin']}>
                 <Layout>
-                  <ComingSoon title="Audit Logs — Coming in Part 7" />
+                  <AuditLogsPage />
                 </Layout>
               </ProtectedRoute>
             }
@@ -118,7 +120,7 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['Admin']}>
                 <Layout>
-                  <ComingSoon title="Admin Panel — Coming in Part 7" />
+                  <AdminPage />
                 </Layout>
               </ProtectedRoute>
             }

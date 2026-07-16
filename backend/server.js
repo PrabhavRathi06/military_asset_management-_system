@@ -82,7 +82,7 @@ app.use('/api/assignments', require('./routes/assignments'));
 app.use('/api/expenditures', require('./routes/expenditures'));
 
 // Audit Logs routes - Part 7
-// app.use('/api/audit-logs', require('./routes/auditLogs'));
+app.use('/api/audit-logs', require('./routes/auditLogs'));
 
 // Admin routes (users, bases, assets management) - Part 7
 // app.use('/api/admin', require('./routes/admin'));
