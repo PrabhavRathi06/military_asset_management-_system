@@ -13,6 +13,7 @@ import Layout from './components/Layout';
 
 // Pages
 import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
 
 // Placeholder pages (will be replaced in upcoming parts)
 const ComingSoon = ({ title }) => (
@@ -54,7 +55,7 @@ function App() {
             element={
               <ProtectedRoute>
                 <Layout>
-                  <ComingSoon title="Dashboard — Coming in Part 3" />
+                  <DashboardPage />
                 </Layout>
               </ProtectedRoute>
             }

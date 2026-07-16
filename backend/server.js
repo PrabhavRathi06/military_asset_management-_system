@@ -67,7 +67,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/admin', require('./routes/admin'));
 
 // Dashboard routes - Part 3
-// app.use('/api/dashboard', require('./routes/dashboard'));
+app.use('/api/dashboard', require('./routes/dashboard'));
 
 // Purchases routes - Part 4
 // app.use('/api/purchases', require('./routes/purchases'));
