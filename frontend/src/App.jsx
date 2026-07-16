@@ -1,62 +1,127 @@
 // =============================================
 // App.jsx
 // Root component - sets up routing for the entire app
-// We'll add more routes as we build each part
 // =============================================
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 
-// Pages (we'll create these in upcoming parts)
-// import LoginPage from './pages/LoginPage';
-// import DashboardPage from './pages/DashboardPage';
-// import PurchasesPage from './pages/PurchasesPage';
-// import TransfersPage from './pages/TransfersPage';
-// import AssignmentsPage from './pages/AssignmentsPage';
-// import AuditLogsPage from './pages/AuditLogsPage';
-// import AdminPage from './pages/AdminPage';
+// Layout & Guards
+import ProtectedRoute from './components/ProtectedRoute';
+import Layout from './components/Layout';
 
-// Temporary placeholder page while we build
+// Pages
+import LoginPage from './pages/LoginPage';
+
+// Placeholder pages (will be replaced in upcoming parts)
 const ComingSoon = ({ title }) => (
   <div style={{ padding: '2rem', textAlign: 'center' }}>
-    <h2>🪖 {title}</h2>
-    <p style={{ marginTop: '0.5rem', color: '#718096' }}>Coming soon...</p>
+    <h2 style={{ color: 'var(--color-primary)' }}>🪖 {title}</h2>
+    <p style={{ marginTop: '0.5rem', color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
+      This section is being built in the next part...
+    </p>
   </div>
 );
 
 // -----------------------------------------------
-// Main App with routing
+// Main App component
 // -----------------------------------------------
 function App() {
   return (
     <AuthProvider>
-      {/* react-hot-toast notification container */}
+      {/* Toast notifications (top-right corner) */}
       <Toaster
         position="top-right"
         toastOptions={{
           duration: 3000,
-          style: {
-            fontSize: '0.875rem',
-            borderRadius: '8px',
-          },
+          style: { fontSize: '0.875rem', borderRadius: '8px' },
+          success: { iconTheme: { primary: '#2d7d46', secondary: 'white' } },
+          error: { iconTheme: { primary: '#c0392b', secondary: 'white' } },
         }}
       />
 
       <Router>
         <Routes>
-          {/* Public routes */}
-          <Route path="/login" element={<ComingSoon title="Login Page" />} />
+          {/* ===== PUBLIC ROUTES ===== */}
+          <Route path="/login" element={<LoginPage />} />
 
-          {/* Protected routes - will be added in Part 2 */}
-          <Route path="/dashboard" element={<ComingSoon title="Dashboard" />} />
-          <Route path="/purchases" element={<ComingSoon title="Purchases" />} />
-          <Route path="/transfers" element={<ComingSoon title="Transfers" />} />
-          <Route path="/assignments" element={<ComingSoon title="Assignments & Expenditures" />} />
-          <Route path="/audit-logs" element={<ComingSoon title="Audit Logs" />} />
-          <Route path="/admin" element={<ComingSoon title="Admin Panel" />} />
+          {/* ===== PROTECTED ROUTES (login required) ===== */}
 
-          {/* Default redirect */}
+          {/* Dashboard - all roles */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <ComingSoon title="Dashboard — Coming in Part 3" />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Purchases - all roles */}
+          <Route
+            path="/purchases"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <ComingSoon title="Purchases — Coming in Part 4" />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Transfers - all roles */}
+          <Route
+            path="/transfers"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <ComingSoon title="Transfers — Coming in Part 5" />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Assignments & Expenditures - Admin and BaseCommander only */}
+          <Route
+            path="/assignments"
+            element={
+              <ProtectedRoute allowedRoles={['Admin', 'BaseCommander']}>
+                <Layout>
+                  <ComingSoon title="Assignments & Expenditures — Coming in Part 6" />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Audit Logs - Admin only */}
+          <Route
+            path="/audit-logs"
+            element={
+              <ProtectedRoute allowedRoles={['Admin']}>
+                <Layout>
+                  <ComingSoon title="Audit Logs — Coming in Part 7" />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Admin Panel - Admin only */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute allowedRoles={['Admin']}>
+                <Layout>
+                  <ComingSoon title="Admin Panel — Coming in Part 7" />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Default: redirect root to login */}
+          <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </Router>

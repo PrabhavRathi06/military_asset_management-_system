@@ -61,7 +61,10 @@ app.get('/', (req, res) => {
 });
 
 // Auth routes (login, register) - Part 2
-// app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth', require('./routes/auth'));
+
+// Admin routes (manage users, bases, assets) - Part 2
+app.use('/api/admin', require('./routes/admin'));
 
 // Dashboard routes - Part 3
 // app.use('/api/dashboard', require('./routes/dashboard'));
