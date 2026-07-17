@@ -1,40 +1,242 @@
 # 🪖 Military Asset Management System
 
-A full-stack web application to help military commanders and logistics teams track and manage military equipment across multiple army bases.
+A full-stack web application for managing military assets (vehicles, weapons, ammunition) across multiple army bases. Built with Node.js, Express, MongoDB Atlas, React, Vite, and Tailwind CSS.
 
-## Tech Stack
-- **Frontend**: React.js + Tailwind CSS (Vite)
-- **Backend**: Node.js + Express.js
-- **Database**: MongoDB Atlas
-- **Auth**: JWT (JSON Web Tokens)
+---
 
-## Project Structure
+## 🔑 Demo Login Credentials
+
+| Role | Email | Password |
+|---|---|---|
+| **Admin** | admin@military.com | Admin@123 |
+| **Base Commander** | commander@military.com | Commander@123 |
+| **Logistics Officer** | logistics@military.com | Logistics@123 |
+
+---
+
+## 📋 Features
+
+- **Dashboard** — Opening Balance, Closing Balance, Net Movement (clickable popup), Assigned, Expended with date/base/type filters
+- **Purchases** — Record asset purchases, auto-updates inventory stock
+- **Transfers** — Move assets between bases with stock validation
+- **Assignments** — Issue assets to personnel / units
+- **Expenditures** — Record assets used, damaged, destroyed, expired, or lost
+- **Audit Logs** — Full activity trail (Admin only)
+- **Admin Panel** — Manage users, bases, and asset types (Admin only)
+
+### Role-Based Access Control (RBAC)
+
+| Feature | Admin | Base Commander | Logistics Officer |
+|---|:---:|:---:|:---:|
+| Dashboard (all bases) | ✅ | ❌ (own base) | ❌ (own base) |
+| Purchases | ✅ | ✅ | ✅ |
+| Transfers | ✅ | ✅ | ✅ |
+| Assignments & Expenditures | ✅ | ✅ | ❌ |
+| Audit Logs | ✅ | ❌ | ❌ |
+| Admin Panel | ✅ | ❌ | ❌ |
+
+---
+
+## 🗂️ Project Structure
+
 ```
 military_asset_management_system/
-├── backend/     → Node.js + Express API
-└── frontend/    → React.js app
+├── backend/                  # Node.js + Express API
+│   ├── config/
+│   │   └── db.js             # MongoDB Atlas connection
+│   ├── controllers/          # Route logic
+│   │   ├── authController.js
+│   │   ├── adminController.js
+│   │   ├── dashboardController.js
+│   │   ├── purchaseController.js
+│   │   ├── transferController.js
+│   │   ├── assignmentController.js
+│   │   ├── expenditureController.js
+│   │   └── auditLogController.js
+│   ├── middleware/
+│   │   ├── auth.js           # JWT verification
+│   │   └── rbac.js           # Role-based authorization
+│   ├── models/               # Mongoose schemas
+│   │   ├── User.js
+│   │   ├── Base.js
+│   │   ├── Asset.js
+│   │   ├── Inventory.js
+│   │   ├── Purchase.js
+│   │   ├── Transfer.js
+│   │   ├── Assignment.js
+│   │   ├── Expenditure.js
+│   │   └── AuditLog.js
+│   ├── routes/               # Express routers
+│   ├── utils/
+│   │   ├── auditLogger.js    # Audit log helper
+│   │   └── seed.js           # Database seeding script
+│   ├── .env                  # Environment variables (not in git)
+│   ├── .env.example          # Environment template
+│   ├── package.json
+│   └── server.js             # App entry point
+│
+└── frontend/                 # React + Vite + Tailwind
+    ├── src/
+    │   ├── api/              # Axios API call helpers
+    │   ├── components/       # Layout, ProtectedRoute
+    │   ├── context/          # AuthContext (JWT storage)
+    │   └── pages/            # One file per page/feature
+    ├── .env                  # Environment variables (not in git)
+    ├── .env.example          # Environment template
+    ├── vercel.json           # Vercel SPA routing fix
+    └── vite.config.js
 ```
 
-## Setup Instructions
+---
 
-### Backend
+## ⚙️ Local Development Setup
+
+### Prerequisites
+- Node.js (v18+)
+- npm
+- MongoDB Atlas account (free tier works)
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/PrabhavRathi06/military_asset_management-_system.git
+cd "military_asset_management _system"
+```
+
+### 2. Backend Setup
+
 ```bash
 cd backend
 npm install
-# Create a .env file with your MongoDB URI and JWT_SECRET
-npm run dev
 ```
 
-### Frontend
+Create your `.env` file:
+```bash
+copy .env.example .env
+```
+
+Edit `backend/.env` with your values:
+```
+MONGO_URI=mongodb+srv://your_user:your_password@cluster0.xxxxx.mongodb.net/?appName=Cluster0
+JWT_SECRET=your_secret_key_here
+JWT_EXPIRE=7d
+PORT=5000
+FRONTEND_URL=http://localhost:5173
+```
+
+Seed the database with demo data:
+```bash
+node utils/seed.js
+```
+
+Start the backend server:
+```bash
+npm run dev
+```
+Backend runs on → `http://localhost:5000`
+
+### 3. Frontend Setup
+
 ```bash
 cd frontend
 npm install
-npm run dev
 ```
 
-## Login Credentials (Demo)
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@military.com | Admin@123 |
-| Base Commander | commander@military.com | Commander@123 |
-| Logistics Officer | logistics@military.com | Logistics@123 |
+Create your `.env` file:
+```bash
+copy .env.example .env
+```
+
+Edit `frontend/.env`:
+```
+VITE_API_URL=http://localhost:5000/api
+```
+
+Start the frontend:
+```bash
+npm run dev
+```
+Frontend runs on → `http://localhost:5173`
+
+---
+
+## 🚀 Deployment Guide
+
+### Backend → Render
+
+1. Go to [render.com](https://render.com) → **New Web Service**
+2. Connect your GitHub repo
+3. Settings:
+   - **Root Directory:** `backend`
+   - **Build Command:** `npm install`
+   - **Start Command:** `node server.js`
+4. Add Environment Variables in Render dashboard:
+   - `MONGO_URI` — your Atlas connection string
+   - `JWT_SECRET` — your secret key
+   - `JWT_EXPIRE` — `7d`
+   - `PORT` — `5000`
+   - `FRONTEND_URL` — your Vercel URL (add after deploying frontend)
+5. Deploy and copy the Render URL (e.g. `https://milasset-api.onrender.com`)
+
+### Frontend → Vercel
+
+1. Go to [vercel.com](https://vercel.com) → **New Project**
+2. Import your GitHub repo
+3. Settings:
+   - **Root Directory:** `frontend`
+   - **Framework Preset:** Vite
+4. Add Environment Variable:
+   - `VITE_API_URL` → `https://your-render-app.onrender.com/api`
+5. Deploy!
+
+> The `vercel.json` file in the frontend folder handles SPA routing automatically.
+
+---
+
+## 📡 API Endpoints
+
+| Method | Route | Access | Description |
+|---|---|---|---|
+| POST | `/api/auth/login` | Public | Login and get JWT |
+| POST | `/api/auth/register` | Public | Register new user |
+| GET | `/api/auth/me` | All | Get logged-in user |
+| GET | `/api/dashboard` | All | Get KPI metrics |
+| GET/POST | `/api/purchases` | All | List / create purchases |
+| GET/POST | `/api/transfers` | All | List / create transfers |
+| GET/POST | `/api/assignments` | Admin, Commander | List / create assignments |
+| GET/POST | `/api/expenditures` | Admin, Commander | List / create expenditures |
+| GET | `/api/audit-logs` | Admin | View full audit trail |
+| GET/POST | `/api/admin/users` | Admin | Manage users |
+| GET/POST | `/api/admin/bases` | Admin | Manage bases |
+| GET/POST | `/api/admin/assets` | Admin | Manage asset types |
+
+---
+
+## 🧱 Technology Stack
+
+| Layer | Technology |
+|---|---|
+| **Backend** | Node.js, Express.js |
+| **Database** | MongoDB Atlas + Mongoose |
+| **Authentication** | JWT (JSON Web Tokens) |
+| **Frontend** | React 18, Vite |
+| **Styling** | Tailwind CSS |
+| **HTTP Client** | Axios |
+| **Notifications** | react-hot-toast |
+| **Icons** | lucide-react |
+| **Deployment** | Render (backend) + Vercel (frontend) |
+
+---
+
+## 🔒 Security Notes
+
+- Passwords are hashed using **bcryptjs** (salt rounds: 10)
+- JWT tokens are stored in **localStorage** and attached via Axios interceptors
+- Route protection is enforced at **both** frontend (ProtectedRoute) and backend (middleware)
+- `.env` files are in `.gitignore` — never committed to GitHub
+
+---
+
+## 👨‍💻 Author
+
+**Prabhav Rathi** — [GitHub](https://github.com/PrabhavRathi06)
