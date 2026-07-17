@@ -30,10 +30,10 @@ connectDB();
 // -----------------------------------------------
 
 // CORS: Allow the React frontend to call this backend
-// Without this, browsers block cross-origin requests
+// FRONTEND_URL is set in Render environment variables
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
     credentials: true,
   })
 );
@@ -84,8 +84,7 @@ app.use('/api/expenditures', require('./routes/expenditures'));
 // Audit Logs routes - Part 7
 app.use('/api/audit-logs', require('./routes/auditLogs'));
 
-// Admin routes (users, bases, assets management) - Part 7
-// app.use('/api/admin', require('./routes/admin'));
+
 
 // -----------------------------------------------
 // 404 Handler - if no route matched
