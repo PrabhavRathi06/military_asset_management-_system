@@ -10,7 +10,7 @@ import axios from 'axios';
 // Base URL of our backend API
 // In development: http://localhost:5000/api
 // In production: the Render URL (set in .env)
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://military-asset-management-system-9dlr.onrender.com/api';
 
 // Create a custom axios instance with default settings
 const axiosInstance = axios.create({
