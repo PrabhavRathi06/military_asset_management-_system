@@ -32,13 +32,18 @@ connectDB();
 // CORS: Allow any frontend origin to call this backend
 // We use JWT in Authorization headers (not cookies) so
 // we don't need credentials:true — this keeps it simple and portable
-app.use(
-  cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  })
-);
+const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200, // Some older browsers choke on 204
+};
+
+app.use(cors(corsOptions));
+
+// Explicitly handle OPTIONS preflight requests for all routes
+// This is required for browsers to allow cross-origin POST/PUT requests
+app.options('*', cors(corsOptions));
 
 // Parse incoming JSON request bodies
 // Without this, req.body would be undefined
