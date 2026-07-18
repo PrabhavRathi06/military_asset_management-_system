@@ -29,12 +29,14 @@ connectDB();
 // Middleware runs on EVERY request before hitting routes
 // -----------------------------------------------
 
-// CORS: Allow the React frontend to call this backend
-// FRONTEND_URL is set in Render environment variables
+// CORS: Allow any frontend origin to call this backend
+// We use JWT in Authorization headers (not cookies) so
+// we don't need credentials:true — this keeps it simple and portable
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-    credentials: true,
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
 
