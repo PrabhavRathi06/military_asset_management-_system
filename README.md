@@ -2,6 +2,13 @@
 
 A full-stack web application for managing military assets (vehicles, weapons, ammunition) across multiple army bases. Built with Node.js, Express, MongoDB Atlas, React, Vite, and Tailwind CSS.
 
+## 🔗 Project Links
+
+- **Live Demo Video:** [Watch on Google Drive](https://drive.google.com/file/d/1olQGA-in64gu4YecJ8DilxRGe8jx0ab_/view)
+- **Live Website (Frontend):** [Vercel App](https://military-asset-management-system-phi-one.vercel.app)
+- **API (Backend):** [Render App](https://military-asset-management-system-9dlr.onrender.com)
+- **GitHub Repository:** [military_asset_management-_system](https://github.com/PrabhavRathi06/military_asset_management-_system)
+
 ---
 
 ## 🔑 Demo Login Credentials
@@ -34,6 +41,33 @@ A full-stack web application for managing military assets (vehicles, weapons, am
 | Assignments & Expenditures | ✅ | ✅ | ❌ |
 | Audit Logs | ✅ | ❌ | ❌ |
 | Admin Panel | ✅ | ❌ | ❌ |
+
+---
+
+## 📸 Screenshots
+
+### Login & Dashboard
+![Login Page](./images/01-login.png)
+![Admin Dashboard](./images/02-dashboard-admin.png)
+![Net Movement Breakdown](./images/10-net-movement-breakdown.png)
+
+### Core Modules
+![Purchases](./images/03-purchases.png)
+![Transfers](./images/04-transfers.png)
+![Assignments](./images/05-assignments.png)
+![Audit Logs](./images/06-audit-logs.png)
+
+### Admin Panel
+![Manage Users](./images/07-admin-users.png)
+![Manage Bases](./images/08-admin-bases.png)
+![Manage Asset Types](./images/09-admin-asset-types.png)
+
+### Role-Based Views
+![Base Commander Dashboard](./images/11-dashboard-commander.png)
+![Logistics Officer Dashboard](./images/12-dashboard-logistics.png)
+
+### Database (MongoDB Atlas)
+![MongoDB Atlas Database](./images/13-mongodb-atlas.png)
 
 ---
 
