@@ -130,6 +130,9 @@ const login = async (req, res) => {
     // matchPassword is a method defined in the User model
     const isMatch = await user.matchPassword(password);
 
+    // DEBUG: Log to trace login issues (remove after fix)
+    console.log(`[LOGIN DEBUG] email=${email} | userFound=${!!user} | isMatch=${isMatch} | hashLen=${user?.passwordHash?.length}`);
+
     if (!isMatch) {
       return res.status(401).json({
         success: false,
