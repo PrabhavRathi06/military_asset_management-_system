@@ -120,10 +120,9 @@ const login = async (req, res) => {
     const user = await User.findOne({ email: email.toLowerCase() }).populate('baseId', 'name location');
 
     if (!user) {
-      console.log(`[AUTH DEBUG] No user found for email: ${email}`);
       return res.status(401).json({
         success: false,
-        message: 'DEBUG: User not found in database',
+        message: 'Invalid email or password',
       });
     }
 
@@ -131,14 +130,10 @@ const login = async (req, res) => {
     // matchPassword is a method defined in the User model
     const isMatch = await user.matchPassword(password);
 
-    // DEBUG: Log to trace login issues (remove after fix)
-    console.log(`[LOGIN DEBUG] email=${email} | userFound=${!!user} | isMatch=${isMatch} | hashLen=${user?.passwordHash?.length}`);
-
     if (!isMatch) {
-      console.log(`[AUTH DEBUG] Password mismatch for: ${email} | hashLen=${user.passwordHash?.length}`);
       return res.status(401).json({
         success: false,
-        message: 'DEBUG: Password does not match hash',
+        message: 'Invalid email or password',
       });
     }
 
