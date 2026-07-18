@@ -194,39 +194,6 @@ Frontend runs on → `http://localhost:5173`
 
 ---
 
-## 🚀 Deployment Guide
-
-### Backend → Render
-
-1. Go to [render.com](https://render.com) → **New Web Service**
-2. Connect your GitHub repo
-3. Settings:
-   - **Root Directory:** `backend`
-   - **Build Command:** `npm install`
-   - **Start Command:** `node server.js`
-4. Add Environment Variables in Render dashboard:
-   - `MONGO_URI` — your Atlas connection string
-   - `JWT_SECRET` — your secret key
-   - `JWT_EXPIRE` — `7d`
-   - `PORT` — `5000`
-   - `FRONTEND_URL` — your Vercel URL (add after deploying frontend)
-5. Deploy and copy the Render URL (e.g. `https://milasset-api.onrender.com`)
-
-### Frontend → Vercel
-
-1. Go to [vercel.com](https://vercel.com) → **New Project**
-2. Import your GitHub repo
-3. Settings:
-   - **Root Directory:** `frontend`
-   - **Framework Preset:** Vite
-4. Add Environment Variable:
-   - `VITE_API_URL` → `https://your-render-app.onrender.com/api`
-5. Deploy!
-
-> The `vercel.json` file in the frontend folder handles SPA routing automatically.
-
----
-
 ## 📡 API Endpoints
 
 | Method | Route | Access | Description |
