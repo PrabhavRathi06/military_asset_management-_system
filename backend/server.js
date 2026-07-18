@@ -52,6 +52,12 @@ app.use(express.json());
 // Parse URL-encoded form data (for HTML forms)
 app.use(express.urlencoded({ extended: false }));
 
+// DEBUG: Log every incoming request so we can confirm it reaches Express
+app.use((req, res, next) => {
+  console.log(`[REQ] ${req.method} ${req.path} | body keys: ${Object.keys(req.body || {}).join(',')}`);
+  next();
+});
+
 // -----------------------------------------------
 // API Routes
 // Each feature has its own route file
